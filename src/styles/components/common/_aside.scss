@@ -1,0 +1,133 @@
+.aside-section {
+	width: 25%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	position: sticky;
+	top: 75px;
+	h3 {
+		position: relative;
+		color: $color-black;
+	}
+	h3:before {
+		content: "";
+		position: absolute;
+		height: 14px;
+		width: 10%;
+		margin: 13px 70px 0 0;
+		bottom: -6px;
+		left: 0;
+		background-color: rgba(253, 79, 24, 0.2);
+	}
+	.popular-recipe-card:hover {
+		h5 {
+			color: $color-orange;
+		}
+	}
+	.popular-recipe-card {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 10px;
+		margin-bottom: 15px;
+		img {
+			width: 82px;
+			height: 82px;
+			object-fit: cover;
+		}
+		div {
+			display: flex;
+			flex-direction: column;
+			width: 75%;
+		}
+		h5 {
+			margin: 0;
+			font-size: 18px;
+			margin-bottom: 10px;
+			cursor: pointer;
+			transition: color 0.5s;
+		}
+		span {
+			font-size: 11px;
+			font-weight: 300;
+			font-family: inherit;
+		}
+	}
+	.what-cooking-card:hover {
+		img {
+			filter: brightness(40%);
+		}
+	}
+	.what-cooking-card {
+		width: 100%;
+		height: 205px;
+		position: relative;
+		margin-bottom: 15px;
+		cursor: pointer;
+	}
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: brightness(50%);
+		transition: filter 0.5s;
+	}
+	.titles {
+		position: absolute;
+		bottom: 10px;
+		left: 15%;
+		color: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+		max-width: 70%;
+		h3 {
+			color: #fff;
+			margin: 0;
+			margin-bottom: 10px;
+			font-size: 18px;
+		}
+		span {
+			font-size: 11px;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+		}
+	}
+	.popular-post-card:hover {
+		h5 {
+			color: $color-orange;
+		}
+	}
+	.popular-post-card {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 10px;
+		margin-bottom: 15px;
+		img {
+			width: 82px;
+			height: 82px;
+			object-fit: cover;
+		}
+		div {
+			display: flex;
+			flex-direction: column;
+			width: 75%;
+		}
+		h5 {
+			margin: 0;
+			font-size: 18px;
+			margin-bottom: 10px;
+			cursor: pointer;
+			transition: color 0.5s;
+		}
+		span {
+			font-size: 11px;
+			font-weight: 300;
+			font-family: inherit;
+		}
+	}
+}

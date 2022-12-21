@@ -1,0 +1,19 @@
+.error-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	max-width: 1600px;
+	padding-top: 100px;
+	.error-svg-container {
+		width: 100%;
+		max-width: 1000px;
+		height: auto;
+	}
+	h3 {
+		color: #8a899e;
+		font-size: 32px;
+		margin-top: 80px;
+	}
+}
