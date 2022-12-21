@@ -8,17 +8,17 @@ const Footer = () => {
 	const [recetas, setRecetas] = useState([]);
 	const [recetasRandom, setRecetasRandom] = useState([]);
 
-	// useEffect(() => {
-	// 	(async function () {
-	// 		const res = await fetch(urlWeb + "/datos.json");
-	// 		const data = await res.json();
-	// 		setRecetas(
-	// 			data.recetas.sort((a, b) => {
-	// 				return convertDate(b.date) - convertDate(a.date);
-	// 			}),
-	// 		);
-	// 	})();
-	// }, []);
+	useEffect(() => {
+		(async function () {
+			const res = await fetch(urlWeb + "/datos.json");
+			const data = await res.json();
+			setRecetas(
+				data.recetas.sort((a, b) => {
+					return convertDate(b.date) - convertDate(a.date);
+				}),
+			);
+		})();
+	}, []);
 
 	useEffect(() => {
 		const categoriasArr = [];

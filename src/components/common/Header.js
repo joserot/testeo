@@ -48,13 +48,13 @@ const Header = () => {
 		});
 	}, []);
 
-	// useEffect(() => {
-	// 	(async function () {
-	// 		const res = await fetch(urlWeb + "/datos.json");
-	// 		const data = await res.json();
-	// 		setRecetas(data.recetas);
-	// 	})();
-	// }, []);
+	useEffect(() => {
+		(async function () {
+			const res = await fetch(urlWeb + "/datos.json");
+			const data = await res.json();
+			setRecetas(data.recetas);
+		})();
+	}, []);
 
 	useEffect(() => {
 		const categoriasArr = [];
