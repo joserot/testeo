@@ -11,7 +11,9 @@ const Footer = () => {
 	useEffect(() => {
 		(async function () {
 			const res = await fetch(urlWeb + "/datos.json", {
-				referrerPolicy: "unsafe_url",
+				headers: {
+					referrerPolicy: "unsafe_url",
+				},
 			});
 			const data = await res.json();
 			setRecetas(
