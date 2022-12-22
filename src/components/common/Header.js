@@ -53,6 +53,8 @@ const Header = () => {
 			const res = await fetch(urlWeb + "/datos.json", {
 				headers: {
 					referrerPolicy: "unsafe_url",
+					"Access-Control-Allow-Origin": "*",
+					"Content-type": "application/json",
 				},
 			});
 			const data = await res.json();
