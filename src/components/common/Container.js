@@ -15,6 +15,10 @@ const Container = ({ children }) => {
 					href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
 					rel="stylesheet"
 				></link>
+				<meta
+					http-equiv="Content-Security-Policy"
+					content="upgrade-insecure-requests"
+				></meta>
 			</Head>
 			<Header />
 			<div className="container">{children}</div>
