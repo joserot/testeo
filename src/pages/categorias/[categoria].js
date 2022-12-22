@@ -3,11 +3,12 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdDinnerDining } from "react-icons/md";
 import { MdRamenDining } from "react-icons/md";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { urlWeb } from "../../helpers/variables";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { removeAccents } from "../../helpers/removeAccents";
+import RecetasContext from "../../context/recetasContext";
 
 const easyAndFast = ({ recetas, categoria }) => {
 	const cardsPerPage = 12;
@@ -19,6 +20,10 @@ const easyAndFast = ({ recetas, categoria }) => {
 	const [query, setQuery] = useState("");
 	const count = filterCards.length;
 	const totalPages = Math.ceil(count / cardsPerPage);
+	//context
+	const { setRecetas } = useContext(RecetasContext);
+
+	setRecetas(recetas);
 
 	useEffect(() => {
 		setCards(recetas);

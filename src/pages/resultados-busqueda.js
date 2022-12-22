@@ -1,17 +1,22 @@
 import Container from "../components/common/Container";
 import { useRouter } from "next/router";
 import { urlWeb } from "../helpers/variables";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import { removeAccents } from "../helpers/removeAccents";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { MdDinnerDining } from "react-icons/md";
 import { MdRamenDining } from "react-icons/md";
+import RecetasContext from "../context/recetasContext";
 
 const searchResults = ({ recetas }) => {
 	const router = useRouter();
 	const { busqueda } = router.query;
 	const [recetasCards, setRecetasCards] = useState([]);
+	//context
+	const { setRecetas } = useContext(RecetasContext);
+
+	setRecetas(recetas);
 
 	useEffect(() => {
 		const filterRecetas = recetas.filter((receta) => {

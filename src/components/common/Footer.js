@@ -1,38 +1,43 @@
 import { urlWeb } from "../../helpers/variables";
 import Link from "next/link";
-import { useRef, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { removeAccents } from "../../helpers/removeAccents";
+import RecetasContext from "../../context/recetasContext";
 
 const Footer = () => {
 	const [categorias, setCategorias] = useState([]);
-	const [recetas, setRecetas] = useState([]);
+	//const [recetas, setRecetas] = useState([]);
 	const [recetasRandom, setRecetasRandom] = useState([]);
+	//context
+	const { recetas, setRecetas } = useContext(RecetasContext);
+
+	// useEffect(() => {
+	// 	(async function () {
+	// 		const res = await fetch(urlWeb + "/datos.json", {
+	// 			headers: {
+	// 				referrerPolicy: "unsafe_url",
+	// 				"Access-Control-Allow-Origin": "*",
+	// 				"Content-type": "application/json",
+	// 			},
+	// 		});
+	// 		const data = await res.json();
+	// 		setRecetas(
+	// 			data.recetas.sort((a, b) => {
+	// 				return convertDate(b.date) - convertDate(a.date);
+	// 			}),
+	// 		);
+	// 	})();
+	// }, []);
 
 	useEffect(() => {
-		(async function () {
-			const res = await fetch(urlWeb + "/datos.json", {
-				headers: {
-					referrerPolicy: "unsafe_url",
-					"Access-Control-Allow-Origin": "*",
-					"Content-type": "application/json",
-				},
+		if (recetas) {
+			const categoriasArr = [];
+			recetas.forEach((receta) => {
+				categoriasArr.push(receta.categoria.toLowerCase());
 			});
-			const data = await res.json();
-			setRecetas(
-				data.recetas.sort((a, b) => {
-					return convertDate(b.date) - convertDate(a.date);
-				}),
-			);
-		})();
-	}, []);
-
-	useEffect(() => {
-		const categoriasArr = [];
-		recetas.forEach((receta) => {
-			categoriasArr.push(receta.categoria.toLowerCase());
-		});
-		const myUniqueArray = [...new Set(categoriasArr)];
-		setCategorias(myUniqueArray);
+			const myUniqueArray = [...new Set(categoriasArr)];
+			setCategorias(myUniqueArray);
+		}
 	}, [recetas]);
 
 	useEffect(() => {
@@ -45,14 +50,14 @@ const Footer = () => {
 		);
 	}, [recetas]);
 
-	const convertDate = (str) => {
-		let year = parseInt(str.slice(6, 10));
-		let month = parseInt(str.slice(3, 5));
-		let date = parseInt(str.slice(0, 2));
-		let hours = parseInt(str.slice(11, 13));
-		let minutes = parseInt(str.slice(14, 16));
-		return new Date(year, month, date, hours, minutes);
-	};
+	// const convertDate = (str) => {
+	// 	let year = parseInt(str.slice(6, 10));
+	// 	let month = parseInt(str.slice(3, 5));
+	// 	let date = parseInt(str.slice(0, 2));
+	// 	let hours = parseInt(str.slice(11, 13));
+	// 	let minutes = parseInt(str.slice(14, 16));
+	// 	return new Date(year, month, date, hours, minutes);
+	// };
 
 	return (
 		<footer>
@@ -72,7 +77,7 @@ const Footer = () => {
 				<article className="footer-section">
 					<h3>RECETAS RECIENTES</h3>
 
-					{recetas.length
+					{recetas
 						? recetas.slice(0, 3).map((receta) => {
 								return (
 									<Link
@@ -99,7 +104,7 @@ const Footer = () => {
 				<article className="footer-section">
 					<h3>MÁS POPULARES</h3>
 
-					{recetasRandom.length
+					{recetasRandom.length > 2
 						? recetasRandom.slice(0, 3).map((receta) => {
 								return (
 									<Link

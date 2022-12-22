@@ -2,20 +2,23 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import { AiOutlineClose } from "react-icons/ai";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import SearchSection from "./SearchSection";
 import useModal from "../../hooks/useModal";
 import { urlWeb, nav1, nav2, nav3, nav4 } from "../../helpers/variables";
 import { AiFillCaretDown } from "react-icons/ai";
 import { removeAccents } from "../../helpers/removeAccents";
+import RecetasContext from "../../context/recetasContext";
 
 const Header = () => {
 	const nav = useRef(null);
 	const subMenu = useRef(null);
 	const [isOpenSearch, openSearch, closeSearch] = useModal(false);
 	const [categorias, setCategorias] = useState([]);
-	const [recetas, setRecetas] = useState([]);
+	//const [recetas, setRecetas] = useState([]);
 	const router = useRouter();
+	//context
+	const { recetas, setRecetas } = useContext(RecetasContext);
 
 	const burgerMenu = (e) => {
 		e.preventDefault();
@@ -48,31 +51,33 @@ const Header = () => {
 		});
 	}, []);
 
+	// useEffect(() => {
+	// 	(async function () {
+	// 		const res = await fetch(urlWeb + "/datos.json", {
+	// 			headers: {
+	// 				referrerPolicy: "unsafe_url",
+	// 				"Access-Control-Allow-Origin": "*",
+	// 				"Content-type": "application/json",
+	// 			},
+	// 		});
+	// 		const data = await res.json();
+	// 		setRecetas(data.recetas);
+	// 	})();
+	// }, []);
+
 	useEffect(() => {
-		(async function () {
-			const res = await fetch(urlWeb + "/datos.json", {
-				headers: {
-					referrerPolicy: "unsafe_url",
-					"Access-Control-Allow-Origin": "*",
-					"Content-type": "application/json",
-				},
+		if (recetas) {
+			const categoriasArr = [];
+
+			recetas.forEach((receta) => {
+				const categoria = removeAccents(receta.categoria);
+				categoriasArr.push(receta.categoria.toLowerCase());
 			});
-			const data = await res.json();
-			setRecetas(data.recetas);
-		})();
-	}, []);
 
-	useEffect(() => {
-		const categoriasArr = [];
+			const myUniqueArray = [...new Set(categoriasArr)];
 
-		recetas.forEach((receta) => {
-			const categoria = removeAccents(receta.categoria);
-			categoriasArr.push(receta.categoria.toLowerCase());
-		});
-
-		const myUniqueArray = [...new Set(categoriasArr)];
-
-		setCategorias(myUniqueArray);
+			setCategorias(myUniqueArray);
+		}
 	}, [recetas]);
 
 	return (
